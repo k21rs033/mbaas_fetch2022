@@ -19,9 +19,11 @@
       var testClass = new TestClass();
       var key = "text";
       var value = $("#value").val();
+      
       // レコードのフィールドと値を設定
       testClass.set(key, value);
-      // レコードをデータベースに登録
+      
+      // レコード.fetcータベースに登録
       testClass.save()
       .then(function(m) {
         $("#message").html("New object created with objectId: " + testClass.objectId);
@@ -30,6 +32,16 @@
         $("#message").html("Failed to create new object, with error code: " + JSON.stringify(err));
       })
     }
+
+     function fetch(){
+         var TestClass = ncmb.DataStore("FetchTest");
+         TestClass.fetch().then(function(results){
+             var data=results.get("text");
+             var update=results.get("updateDate");
+             $("#message").html(data + ":"+update);
+         })
+     }
+
     </script>
 </head>
 <body>
